@@ -15,5 +15,6 @@ namespace API_CONTAS_PAGAR.Data
                 .HasKey(c => c.IdConta);
         }
         public DbSet<ContaModel> Contas { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
     }
 }

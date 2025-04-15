@@ -15,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ContaRepository>();
 builder.Services.AddScoped<ContaService>();
 
+builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<UsuarioService>();
+
 builder.Services.AddDbContext<ContasPagarDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultString"));

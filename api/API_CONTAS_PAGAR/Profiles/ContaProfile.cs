@@ -8,6 +8,7 @@ namespace API_CONTAS_PAGAR.Profiles
         public ContaProfile()
         {
             CreateMap<ContaRequestModel, ContaModel>();
+            CreateMap<UsuarioRequestModel, UsuarioModel>();
         }
     }
 }
