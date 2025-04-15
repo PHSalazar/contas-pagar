@@ -1,0 +1,32 @@
+﻿using API_CONTAS_PAGAR.Models;
+using API_CONTAS_PAGAR.Repositories;
+using API_CONTAS_PAGAR.Services;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace API_CONTAS_PAGAR.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ContasController : ControllerBase
+    {
+        private readonly ContaService _service;
+        private readonly IMapper _mapper;
+
+        public ContasController(ContaService service, IMapper mapper)
+        {
+            _service = service;
+            _mapper = mapper;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ContaModel>> Create([FromBody] ContaRequestModel novaContaRequest)
+        {
+            var novaConta = _mapper.Map<ContaModel>(novaContaRequest);
+            await _service.Create(novaConta);
+            return Ok(novaConta);
+        }
+    }
+}
