@@ -33,6 +33,24 @@ namespace API_CONTAS_PAGAR.Controllers
             return Ok(contasUsuario);
         }
 
+        [HttpGet("{userId:int}/pendentes")]
+        public async Task<ActionResult<List<ContaModel>>> GetPendingByUser([FromRoute] int userId)
+        {
+            var contasUsuario = await _service.GetByUserId(userId);
+            if (contasUsuario == null)
+            {
+                return NotFound($"Nenhum usuário encontrado com o id {userId}.");
+            }
+
+            var contasPendentesUsuario = await _service.GetPendingByUser(userId);
+            if (contasPendentesUsuario == null)
+            {
+                return NotFound($"Usuário {userId} nao tem faturas em aberto.");
+            }
+
+            return Ok(contasPendentesUsuario);
+        }
+
         [HttpPost]
         public async Task<ActionResult<ContaModel>> Create([FromBody] ContaRequestModel novaContaRequest)
         {

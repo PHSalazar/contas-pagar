@@ -17,6 +17,11 @@ namespace API_CONTAS_PAGAR.Services
             return await _repository.GetByUserId(userId);
         }
 
+        public async Task<List<ContaModel>> GetPendingByUser(int userId)
+        {
+            return await _repository.GetPendingByUser(userId);
+        }
+
         public async Task<ContaModel> Create(ContaModel contaModel)
         {
             return await _repository.Create(contaModel);

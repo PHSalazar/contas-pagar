@@ -25,6 +25,18 @@ namespace API_CONTAS_PAGAR.Repositories
             return contasEncontrada;
         }
 
+        public async Task<List<ContaModel>> GetPendingByUser(int userId)
+        {
+            var contasPendentesEncontradas = await _context.Contas.Where(c => c.IdUsuario == userId && c.ContaPaga == false).ToListAsync();
+
+            if (contasPendentesEncontradas.Count == 0)
+            {
+                return null;
+            }
+
+            return contasPendentesEncontradas;
+        }
+
         public async Task<ContaModel> Create(ContaModel novaConta)
         {
             _context.Contas.Add(novaConta);
