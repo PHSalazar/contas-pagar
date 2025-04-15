@@ -12,6 +12,11 @@ namespace API_CONTAS_PAGAR.Services
             _repository = repository;
         }
 
+        public async Task<List<ContaModel>> GetByUserId(int userId)
+        {
+            return await _repository.GetByUserId(userId);
+        }
+
         public async Task<ContaModel> Create(ContaModel contaModel)
         {
             return await _repository.Create(contaModel);

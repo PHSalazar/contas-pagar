@@ -21,6 +21,18 @@ namespace API_CONTAS_PAGAR.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("{userId:int}")]
+        public async Task<ActionResult<List<ContaModel>>> GetByUserId([FromRoute] int userId)
+        {
+            var contasUsuario = await _service.GetByUserId(userId);
+            if (contasUsuario == null)
+            {
+                return NotFound($"Nenhum usuário encontrado com o id {userId}.");
+            }
+
+            return Ok(contasUsuario);
+        }
+
         [HttpPost]
         public async Task<ActionResult<ContaModel>> Create([FromBody] ContaRequestModel novaContaRequest)
         {
